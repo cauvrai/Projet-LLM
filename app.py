@@ -56,13 +56,13 @@ if "messages" not in st.session_state:
 if "request_count" not in st.session_state:
     st.session_state.request_count = 0
 
-# --- AJOUT ICI : Variable pour gérer l'affichage de l'historique à la fin ---
+
 if "view_history" not in st.session_state:
     st.session_state.view_history = False
 
 MAX_REQUESTS = 5
 
-# --- 4. BARRE LATÉRALE (Sidebar) ---
+# 4. BARRE LATÉRALE
 with st.sidebar:
     if os.path.exists("assets/photo_profil.jpg"):
         col_g, col_img, col_d = st.columns([1, 2, 1])
@@ -84,7 +84,7 @@ with st.sidebar:
         st.link_button("LinkedIn", "https://www.linkedin.com/in/charles-auvrai-0b6b42292/", use_container_width=True)
         st.link_button("Email", "mailto:charlesauvrai@gmail.com", use_container_width=True)
 
-# --- 5. LOGIQUE D'AFFICHAGE ---
+# 5. LOGIQUE D'AFFICHAGE 
 
 ai_avatar = "assets/avatar_ia.png" if os.path.exists("assets/avatar_ia.png") else "🤖"
 user_avatar = "👤"
@@ -157,7 +157,7 @@ if st.session_state.request_count < MAX_REQUESTS:
                 st.session_state.messages.append({"role": "assistant", "content": response_text})
                 st.rerun()
 
-# SI FINIE ( >= 5 ) -> ÉCRAN DE FIN MODIFIÉ
+# SI QUESTION ( >= 5 ) -> ÉCRAN DE FIN MODIFIÉ
 else:
     # Si on n'est PAS en mode "lecture historique", on affiche la carte de contact
     if not st.session_state.view_history:
@@ -170,7 +170,7 @@ else:
             
             with c2:
                 
-                # Phrases mises en avant en bleu
+               
                 st.markdown("""
                 <div class="highlight-phrase">
                     <p>Vous en savez plus sur moi maintenant.</p>
@@ -196,8 +196,8 @@ else:
                 
                 st.divider()
                 
-                # Le bouton active le mode historique
-                if st.button("👀 Revoir l'historique", use_container_width=True):
+                
+                if st.button("Revoir l'historique", use_container_width=True):
                     st.session_state.view_history = True
                     st.rerun()
 
@@ -207,9 +207,10 @@ else:
             st.session_state.view_history = False
             st.rerun()
 
-    # L'historique s'affiche toujours en dessous (ou devient le seul élément visible si view_history est True)
+    # L'historique s'affiche toujours en dessous 
     st.subheader("Historique de la conversation")
     for message in st.session_state.messages:
         role_icon = "🤖" if message["role"] == "assistant" else "👤"
         with st.chat_message(message["role"], avatar=role_icon):
+
             st.write(message["content"])
