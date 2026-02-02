@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from upstash_vector import Index
 
-# 1. On charge tes nouvelles clés du .env
+
 load_dotenv()
 index = Index(url=os.getenv("UPSTASH_VECTOR_REST_URL"), token=os.getenv("UPSTASH_VECTOR_REST_TOKEN"))
 
@@ -36,4 +36,5 @@ def remplir_upstash():
 
 if __name__ == "__main__":
     remplir_upstash()
+
     print("\nUpstash rempli ! Tu peux tester l'agent.")
