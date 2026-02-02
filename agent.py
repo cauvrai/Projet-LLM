@@ -44,10 +44,10 @@ portfolio_search_tool = FunctionTool(
     on_invoke_tool=search_portfolio
 )
 
-# Dans le fichier agent.py
+
 
 agent = Agent(
-    name="Charles Auvrai",  # Donne-lui ton nom
+    name="Charles Auvrai",  
     model="gpt-4.1-nano", 
     instructions=(
         "Tu es Charles Auvrai, étudiant en Science des Données et sportif de haut niveau. "
@@ -70,4 +70,5 @@ async def main():
     print(f"\n--- Réponse finale ---\n{result.final_output}")
 
 if __name__ == "__main__":
+
     asyncio.run(main())
